@@ -1,0 +1,383 @@
+    <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+             xmlns:dc="http://purl.org/dc/terms/"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.2/eml.xsd"
+             packageId="02f3b527-d309-43ee-b964-9713a9ddcd6a/v1.68" system="http://gbif.org" scope="system"
+    xml:lang="eng">
+
+        <dataset>
+                <alternateIdentifier>02f3b527-d309-43ee-b964-9713a9ddcd6a</alternateIdentifier>
+                <alternateIdentifier>https://ipt.taibif.tw/resource?r=trait_454</alternateIdentifier>
+                <title xml:lang="eng">A traits database of 454 bird species in Taiwan</title>
+                    <creator>
+            <individualName>
+                    <givenName>Tzung-Su</givenName>
+                <surName>Ding</surName>
+            </individualName>
+            <organizationName>National Taiwan University</organizationName>
+            <positionName>Professor</positionName>
+            <address>
+                    <deliveryPoint>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)</deliveryPoint>
+                    <city>Taipei</city>
+                    <postalCode>10617</postalCode>
+                    <country>TW</country>
+            </address>
+            <phone>+886233665263</phone>
+            <electronicMailAddress>ding@ntu.edu.tw</electronicMailAddress>
+                    </creator>
+                    <metadataProvider>
+            <individualName>
+                    <givenName>Shu-Wei</givenName>
+                <surName>Fu</surName>
+            </individualName>
+            <organizationName>Taiwan Forestry Research Institute</organizationName>
+            <positionName>Assistant Researcher</positionName>
+            <address>
+                    <city>Taipei</city>
+                    <country>TW</country>
+            </address>
+            <electronicMailAddress>swfu@tfri.gov.tw</electronicMailAddress>
+                    </metadataProvider>
+                    <associatedParty>
+            <individualName>
+                    <givenName>Shu-Wei</givenName>
+                <surName>Fu</surName>
+            </individualName>
+            <organizationName>Taiwan Forestry Research Institute</organizationName>
+            <positionName>Assistant Researcher</positionName>
+            <address>
+                    <city>Taipei</city>
+                    <country>TW</country>
+            </address>
+            <electronicMailAddress>swfu@tfri.gov.tw</electronicMailAddress>
+            <role>author</role>
+                    </associatedParty>
+                    <associatedParty>
+            <individualName>
+                    <givenName>Tzung-Su</givenName>
+                <surName>Ding</surName>
+            </individualName>
+            <organizationName>National Taiwan University</organizationName>
+            <positionName>Professor</positionName>
+            <address>
+                    <deliveryPoint>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)</deliveryPoint>
+                    <city>Taipei</city>
+                    <postalCode>10617</postalCode>
+                    <country>TW</country>
+            </address>
+            <phone>+886233665263</phone>
+            <electronicMailAddress>ding@ntu.edu.tw</electronicMailAddress>
+            <role>author</role>
+                    </associatedParty>
+                    <associatedParty>
+            <individualName>
+                    <givenName>Meng-Chieh</givenName>
+                <surName>Feng</surName>
+            </individualName>
+            <organizationName>National Taiwan University</organizationName>
+            <address>
+                    <deliveryPoint>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)</deliveryPoint>
+                    <city>Taipei</city>
+                    <postalCode>10617</postalCode>
+                    <country>TW</country>
+            </address>
+            <role>author</role>
+                    </associatedParty>
+                    <associatedParty>
+            <individualName>
+                    <givenName>Po-Wei</givenName>
+                <surName>Chi</surName>
+            </individualName>
+            <organizationName>National Taiwan University</organizationName>
+            <address>
+                    <deliveryPoint>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)</deliveryPoint>
+                    <city>Taipei</city>
+                    <postalCode>10617</postalCode>
+                    <country>TW</country>
+            </address>
+            <role>author</role>
+                    </associatedParty>
+            <pubDate>
+                    2024-11-18
+            </pubDate>
+            <language>eng</language>
+                <abstract>
+                            <para>Together with enthusiastic participation of citizen scientists, researchers in Taiwan have accumulated a substantial amount of foraging observations, eBird occurrence samplings, morphological measurements from banded birds and specimens. This extensive data collection has significantly contributed to enhancing our understanding of birds. Here, we compiled a trait dataset of Taiwan’s birds including 454 bird species in 73 families through accumulated data combined with literature. This trait database includes foraging, morphology, migratory status, territoriality, habitat and elevation distribution, breeding characteristics, and regulating functions of bird species in Taiwan&apos;s ecosystem. This resource will serve as important data for the analysis of evolution, functional diversity, and ecosystem services.</para>
+                </abstract>
+                        <keywordSet>
+                                    <keyword>Checklist</keyword>
+                                    <keyword>traits</keyword>
+                                    <keyword>Taiwan</keyword>
+                            <keywordThesaurus>GBIF Dataset Type Vocabulary: http://rs.gbif.org/vocabulary/gbif/dataset_type_2015-07-10.xml</keywordThesaurus>
+                        </keywordSet>
+                <intellectualRights>
+                    <para>This work is licensed under a <ulink url="http://creativecommons.org/licenses/by/4.0/legalcode"><citetitle>Creative Commons Attribution (CC-BY) 4.0 License</citetitle></ulink>.</para>
+                </intellectualRights>
+                <coverage>
+                        <geographicCoverage>
+                                <geographicDescription>Taiwan, and its adjacent islands of Xiaoliuqiu, Lanyu, Green Island, the Penghu Archipelago, and Kinmen.</geographicDescription>
+                            <boundingCoordinates>
+                                <westBoundingCoordinate>116.653</westBoundingCoordinate>
+                                <eastBoundingCoordinate>123.201</eastBoundingCoordinate>
+                                <northBoundingCoordinate>25.503</northBoundingCoordinate>
+                                <southBoundingCoordinate>21.617</southBoundingCoordinate>
+                            </boundingCoordinates>
+                        </geographicCoverage>
+                </coverage>
+                <maintenance>
+                    <description>
+                        <para></para>
+                    </description>
+                    <maintenanceUpdateFrequency>unkown</maintenanceUpdateFrequency>
+                </maintenance>
+
+                    <contact>
+            <individualName>
+                    <givenName>Tzung-Su</givenName>
+                <surName>Ding</surName>
+            </individualName>
+            <organizationName>National Taiwan University</organizationName>
+            <positionName>Professor</positionName>
+            <address>
+                    <deliveryPoint>No. 1, Sec. 4, Roosevelt Road, Taipei, 10617 Taiwan(R.O.C)</deliveryPoint>
+                    <city>Taipei</city>
+                    <postalCode>10617</postalCode>
+                    <country>TW</country>
+            </address>
+            <phone>+886233665263</phone>
+            <electronicMailAddress>ding@ntu.edu.tw</electronicMailAddress>
+                    </contact>
+                <methods>
+                            <methodStep>
+                                <description>
+                                    <para>Migratory status 
+The migratory statuses of bird species were categorized as resident, winter visitor, summer visitor, transient migrant, vagrant, and introduced species. Statuses were derived from 2023 CWBF Checklist of the Birds of Taiwan (Ding et al., 2023), and a given bird species might exhibit multiple statuses within Taiwan.
+
+(1)	Resident: The bird species remains year-round in a specific region.
+(2)	Transient migrant: The bird species only stops for a short period of time during their annual migration.
+(3)	Winter visitor: The bird species spends only the winter in a specific region.
+(4)	Summer visitor: The bird species spends only the summer in a specific region.
+(5)	Vagrant: The bird species recorded outside of its normal distribution range.
+(6)	Introduced species: The bird species was introduced by humans deliberately or accidentally.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Morphology 
+Morphological traits described body length, bill length, head length, natural wing length, tail length, tarsus length, weight, sexual size dimorphism, and sexual plumage dimorphism.
+Body length, bill length, head length, natural wing length, tail length, tarsus length, and weight were quantitative traits, sourced primarily from published literature (Shiu et al., 2005; Hsiao &amp; Li, 2015; Tsai et al., 2020), subsequently from measurements, and finally from the AVONET database (Tobias et al., 2022). Morphological traits of bird species were documented as a mean value, sample size (listed in measurement Remarks), and data source. 
+Sexual dimorphism in size and plumage were binary traits  based on morphological measurements and field guide.Both body size and plumage variations were evaluated separately to discern differences between the sex.
+
+The measurements of bird species were collected from various sources, including literature (Shiu et al., 2005; Severinghaus et al., 2012), specimen collections (National Taiwan Museum, Academia Sinica, Taiwan Forestry Research Institute, National Taiwan University Museum of Zoology), and mist-netted and released field projects (the Monitoring Avian Productivity and Survivorship program of Taiwan and the Taiwan bird banding network). 
+
+Definition of seven morphological measurements:
+(1)	Body length:  The distance from the tip of the beak to the end of the tail feathers.
+(2)	Beak length: The distance from the tip to the base (the feather of the forehead) of the beak.
+(3)	Head length: The distance from the tip of the beak to the back of the skull.
+(4)	Natural wing length: The distance from the carpal joint to the tip of the longest primary feather.
+(5)	Tail length: The distance from the base where the tail feathers grow to the tip of the longest tail feather.
+(6)	Tarsus length: The distance from the base of the tarsus to the tip of the middle toe.
+(7)	Body mass: weight.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Foraging
+Foraging traits described diet, foraging stratum, foraging behavior, activity time, and foraging flock.
+Diet, foraging behavior, and foraging stratum were quantitative proportional traits, with the sum of each item totaling 100 for each bird species. First of all, we searched for foraging observations of each bird species using their Chinese names from the social media Facebook groups &quot;Avian Diet&quot; and &quot;The Feather and Foraging Behavior&quot;. Subsequently, we summarized the information on diet, stratum, and behavior from each observation, and analyzed those of each bird species as proportional data. Results were further refined with literature review. 
+
+17 categories of diet included:
+(1)	Plankton: Microscopic planktonic organisms in aquatic environments with small body size.
+(2)	Annelids: Earthworms, polychaetes, and oligochaetes.
+(3)	Mollusks: Gastropods, cephalopods and squids.
+(4)	Hexapod: Aquatic and terrestrial insects.
+(5)	Crustacean: Crabs, shrimp, and lobsters.
+(6)	Myriapods: Centipedes and millipedes.
+(7)	Spider
+(8)	Mammal: Rodents, shrews, squirrels, rabbit, and bats.
+(9)	Bird
+(10)	Reptiles: Turtles, crocodiles, lizards, and snakes.
+(11)	Amphibian: Mountain loach, toads, and frogs.
+(12)	Fish
+(13)	Carrion and trash: Feeding on animal carcasses, human-generated waste, or food leftovers.
+(14)	Fruit: Berries, drupes, nuts, samaras, and syconus fruits. 
+(15)	Nectar: Feeding on flowers, nectar, or pollen.
+(16)	Seed: Feeding on seeds, grains, or the caryopsis of grasses.
+(17)	Leaf and other plant parts: Leaves, stems, roots, branches, algae or aquatic plants.
+
+10 categories of foraging stratum included:
+(1)	Under the deep water: Foraging beneath the deep water.
+(2)	Below the shallow water: Foraging below the shallow water (at a depth ranging from 5 to 10 inches).
+(3)	Around the water surface: Foraging at the water&apos;s surface (water depth less than 5 inches).
+(4)	Mud flat: Foraging on soft mudflats along the edges of water bodies.
+(5)	On the ground: Foraging on the surface of terrestrial land or among low-growing herbaceous plants (less than 5 inches in height).
+(6)	Understory or tallgrass: Foraging among shrubs or tallgrass where vegetation height is less than two meters.
+(7)	Middle layer in trees: Foraging among the branches and foliage of trees, specifically in the intermediate zone between the forest canopy and shrubs.
+(8)	Canopy layer in trees: Foraging above or within the forest canopy.
+(9)	Trunk: Foraging on the tree trunks.&quot;
+(10)	In aerial: Foraging in the sky.
+
+13 categories of foraging behavior included:
+(1)	Sallying: Birds descend from elevated positions towards the ground or between branches on tree trunks, using their claws to pounce on and seize prey, as seen in raptors.
+(2)	Gleaning: Birds pick or catch food from the ground surface or between the foliage of plants.
+(3)	Sweeping: Use bill to sweep from side to side for food in water column.
+(4)	Sticking: Bird species use their long, sticky tongues to extract food from tree crevices, probing for food and grasping it for consumption.
+(5)	Pecking: To peck at the surface of wood, knocking off bark or wood chips to access food.
+(6)	Sucking: The bird species use their beaks to sip nectar in the flowers.
+(7)	Filtering: The bird species use their beaks to filter-feed on planktonic organisms and algae present in the water.
+(8)	Diving: The bird species, such as cormorants, dive into the water and swim to pursue and catch prey. 
+(9)	Flycatching: The bird species, like flycatchers, fly into the air and capture airborne insects using their beaks. They then return to their original perching spot to consume their prey.
+(10)	Stabbing: The bird species, such as herons, use their beaks to stab into the water and grasp their prey.
+(11)	Skimming: The bird species, like terns, fly in close to the water&apos;s surface while searching for prey. Some terns even plunge into the water, using their beaks to swiftly snatch fish.
+(12)	Probing: Tactile feeders that probe the substrate for prey items. The bird species, such as sandpipers and nuthatches, use their beaks to probe into soft mudflats or crevices in tree trunks to search for, detect, and extract food.
+(13)	Catching while flying: The bird species, like swifts, engage in aerial flight, constantly flying back and forth with their mouths open to catch insects in mid-air.
+
+Diel activity: The foraging patterns of diurnal and nocturnal activity were binary traits, determined by whether a bird species feed during daytime and nighttime periods. The definitions of diurnal and nocturnal activity for each species were referenced from literature and online database (Billerman et al., 2022).
+
+Foraging flocks: Depending on the season and species composition, we categorized foraging flocks as binary data (&apos;1&apos; for &apos;yes&apos;, and &apos;0&apos; for &apos;no&apos;). 
+(1) Conspecific flocks in the breeding season.
+(2) Conspecific flocks in the non-breeding season. 
+(3) Mixed-species flocks during the non-breeding season: Bird species co-occurring in mixed-species flocks was documented in measurement Remarks.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Habitat and elevation distribution 
+Habitat and elevation traits were binary traits, indicating whether the habitat and elevation types were used by each bird species or not. The habitat types were based on the habitat classification scheme of the International Union for Conservation of Nature, further adjusted into 22 types. Four elevation types were classified. The distribution of each bird species among habitat and elevation types were based on eBird occurrence samplings and literature.
+
+Definition of 22 habitat categories in Taiwan	
+(1)	Forest: Areas with continuous stands of trees, including both forested and wooded areas.
+(2)	Shrubland: Areas with scrub, bushland, and thicket.
+2.1	Forest edge: Transition(Ecotone) zone between forests and canopy-opening habitats, shows a high density of saplings, and shrub cover (Matlack,1994).
+2.2	Shrubland: Areas with little or no tree canopy, dense shrubs and saplings within 2m above ground (Schlossberg and King, 2007), distributed from lowland to mountainous regions.
+(3) Grassland: Areas with grasses and broadleaved herbaceous plants, and either without woody plants, or the latter are very sparsely distributed. 
+3.1	Tallgrass : Tall grassland consisting of Miscanthus genus.
+3.2	Short-grass: Prairie, meadow, the low-growing herbaceous plant.
+(4) Inland wetland: Areas with march or water, where the water is either flowing or stagnant.
+4.1	Middle and upper reaches of the stream: Middle and upper reaches of permanent or seasonal rivers, streams, and creeks (including waterfalls). They are usually surrounded by forests in Taiwan.
+4.2	Permanent inland deltas: Created by a river dividing into multiple branches, these usually rejoin and continue to the sea.
+4.3	Freshwater lakes and pools: Freshwater lakes, ponds, water storage areas
+4.4	Tall emergent marshes: Dense and tall emergent vegetation marshes (Environment Canada, 2002).
+4.5	Low emergent marshes: Sparse and lower emergent vegetation marshes (Environment Canada, 2002).
+(5) Rocky area: Including inland cliffs and mountain peaks. 
+(6)Marine neritic area: Submergent, nearshore, on or over the continental shelf or oceanic island shelf.
+6.1	Subtidal rock and rocky reefs: Bottom habitat consisting predominantly of boulders or consolidated rock.
+6.2	Pelagic: The division of the marine environment composed of all the ocean&apos;s water, living in the water column, away from the bottom.
+(7)	Marine intertidal area: Areas of the shore between the extremes of high and low tides.
+7.1	Rocky shoreline: Intertidal shore composed predominantly of consolidated rock or boulders.
+7.2	Sandy and/or pebble shoreline and/or beaches: Intertidal shore composed predominantly of sandy, pebble and cobble sediments.
+7.3	Mud shoreline and intertidal mud flats: Intertidal shore composed predominantly of mud and sandy-mud sediments. 
+(8)	Terrestrial artificial area: Human-made terrestrial habitats.
+8.1	Dryland farming: Dryland farming, including peanut, sweet potato, sugarcane fields, and vegetable gardens.
+8.2	Urban parks: Open space areas, mostly dominated by vegetation and water, and generally reserved for public use (Konijnendijk et al., 2013).
+8.3	Urban and rural area: High intensity of human-made habitat, including buildings, lawns, and houses.
+(9)	Aquatic artificial area: human-made wetland habitats.
+9.1	Aquaculture ponds: Fish or shrimp ponds.
+9.2	Salt exploitation sites: Salt pans, salines.
+9.3	Paddy field: Rice paddies, or other paddy crops.
+
+Elevation was categorized into four categories: 
+(1) Plains: Ranging from 0-100 m above sea level,
+(2) Low elevation : 100-500 m,
+(3) Mid elevation : 500-2,500 m, 
+(4) High elevation : 2,500-3,952 m.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Territoriality
+Birds defended important resources, including nesting sites, pair bonds, or food sources (Pettingill, 1985), within their territory. Territoriality was most commonly observed during the breeding season when birds strived to secure necessary resources for successful breeding. However, some bird species also exhibited defensive behaviors, such as defending foraging territories and perching branches during non-breeding season (Pettingill, 1985).
+
+The territoriality of 202 breeding bird species of the breeding season were categorical traits, based on the way territorial behavior was exhibited. 
+(1) Type A: Bird species defend all-purpose territories for nest sites, mating area, and food resources. 
+(2) Type B: Species that primarily defended for nesting sites and mates but did not maintain specific foraging areas. 
+(3) Type C: Birds mainly defended for nesting sites and a small surrounding area, such as colonial breeding species. 
+(4) Type D: Birds defended the territory for mate or food resources but not for nesting sites, such as cuckoos. 
+
+Territoriality during non-breeding season was binary traits.
+(1) 1: Birds defend their feeding range or perching branches.
+(2) 0: Birds do not defend their feeding range or perching branches.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Breeding characteristics
+The breeding traits included brood parasitism, colonial breeding, nest site, nest structure, and mean clutch size of 203 breeding bird species. Brood parasitism, colonial breeding, nest site, and nest structure were binary traits, mean clutch size was quantitative trait. 
+Brood parasitism referred to the behavior in which certain bird species did not build their own nests but instead laid their eggs in the nest of host species. The host parents then incubated the parasitic eggs and raised the offspring (Payne, 1977). Colonial breeding referred to a form of social reproduction where individuals of a species established densely distributed territories that contained no other resources other than nest sites (Danchin &amp; Wagner, 1997; Perrins &amp; Birkhead, 1983). Nest site described the specific locations of nests within the habitat, and nest structures encompassed the materials used and the shape of the nests. Mean clutch size of multiple broods was determined by prioritizing data from theses and online databases (Billerman et al., 2022). Followed by calculating a mean value from the maximum and minimum values in a brood from literature (Severinghaus et al., 2012).
+
+The location of a nest, 12 categories included:
+(1)	Cliff and banks: Using natural rock walls, cliff ledges, or crevices as nesting sites.
+(2)	Within the foliage: Nests are among foliage of trees or in the tangles of clinging vines.
+(3)	On the branches: Nests are at the forks of branches in trees.
+(4)	In cavity: Birds use cavities and crevices on tree trunks as nesting sites.
+(5)	Epiphytes around the trunk: Birds utilize platforms formed by epiphytic ferns on the main trunks of trees for nesting.
+(6)	Shrubs: Birds nest in low-height plant (&lt; 2m), where the branches or stems bifurcate close to the ground.
+(7)	Vegetated soil slopes: Birds utilize the vegetation-covered surface for nesting.
+(8)	Soil slope without vegetation: Birds nest on bare soil slopes, utilizing the unvegetated surface for nesting.
+(9)	Thick tallgrass: Birds nest within dense stands of reeds or tall grass of Miscanthus genus., utilizing the dense vegetation for nesting. 
+(10)	Ground: On the ground. 
+(11)	Waterbody: On the floating leaf aquatic plants in ponds, lakes, and manmade water bodies. 
+(12)	Artificial structures: Birds use man-made structures such as balconies, walls, rooftops, eaves of buildings, as well as platforms of bridges, crevices of the traffic signals, and tall towers as nesting sites.
+
+The materials used and shape of a nest, 8 categories included:
+(1)	Scrape: A nest on the ground that lacks nesting materials and shows only minor signs of scratching or scraping.
+(2)	Platform: A shallow nest constructed by interweaving twigs.
+(3)	Cup: A deep cup-shaped nest constructed by weaving nesting materials or stacking mud, where the bird sits in the nest but is not completely concealed.
+(4)	Dome: A covered nest constructed by weaving nesting materials, with a top covering that provides complete concealment for the bird sitting inside the nest.
+(5)	Dome with a tunnel: A domed nest with a single entrance/exit tunnel was constructed by stacking mud or hole on soils.
+(6)	Bag: A woven nest in a pear-shaped or pouch-like structure.
+(7)	Primary cavity: Bird species that excavate tree cavities as nesting sites.
+(8)	Secondary cavity: Bird species that utilize natural cavities or cavities excavated by other species as nesting sites.</para>
+                                </description>
+                            </methodStep>
+                            <methodStep>
+                                <description>
+                                    <para>Ecosystem services
+Birds provided many regulating services through resources consumption, such as plant pollination, seed dispersal, and insect control (Whelan et al., 2008). Besides, native predators adapted to feed on exotic prey, potentially limiting or suppressing their invasion (Carlsson et al., 2009; Madenjian et al., 2011). We have identified bird species that played a crucial role in providing ecosystem services such as pollination, seed dispersal, and insect control. These services were particularly significant for nectar-eating, fruit-eating, and insect-eating bird species with the proportion exceeds 25%. We also identified native predators that consumed 15 exotic species in Taiwan, including 5 fish species, 3 bird species, 2 amphibian species, 2 gastropod species, 1 crustacean species, 1 insect species, and 1 plant species.</para>
+                                </description>
+                            </methodStep>
+                        <sampling>
+                            <studyExtent>
+                                <description>
+                                    <para>Taiwan, and its adjacent islands of Xiaoliuqiu, Lanyu, Green Island, the Penghu Archipelago, and Kinmen.</para>
+                                </description>
+                            </studyExtent>
+                            <samplingDescription>
+                                <para>Trait data collection started with an extensive web source, and the data were further refined with literature review. The trait database included 32 traits for 454 bird species of Taiwan: 6 migratory traits, 9 morphological traits, 5 foraging traits, 2 distributional traits, 1 territorial trait, 5 breeding traits, and 4 ecosystem service related traits.</para>
+                            </samplingDescription>
+                        </sampling>
+                        <qualityControl>
+                            <description>
+                                <para>Cleaning scientific names: The scientific names of all birds in the dataset were matched based on the taxonomic data from the GBIF backbone taxonomy by using the Name Parser service offered by Taiwan Biodiversity Information Facility (http://www.taibif.org/). We adopted the canonical Name Complete for each input name.</para>
+                            </description>
+                        </qualityControl>
+                </methods>
+        </dataset>
+            <additionalMetadata>
+                <metadata>
+                    <gbif>
+                            <dateStamp>2023-08-08T03:34:26.366+00:00</dateStamp>
+                            <hierarchyLevel>dataset</hierarchyLevel>
+                            <bibliography>
+                                        <citation>1. Billerman, S. M., Keeney, B. K., Rodewald, P. G., &amp; Schulenberg, T. S. (2022). Birds of the World https://doi.org/https://birdsoftheworld.org/bow/home
+2. Carlsson, N. O. L., Sarnelle, O., &amp; Strayer, D. L. (2009). Native predators and exotic prey –an acquired taste? Front. Ecol. Environ., 7(10), 525-532.
+3. Danchin, E., &amp; Wagner, R. H. (1997). The evolution of coloniality: the emergence of new perspectives. Trends Ecol. Evol., 12(9), 342-347. 
+4. Ding, T. S., Juan, C. S., Lin, R. S., Tsai, Y. J., Wu, J. L., Wu, J., &amp; Yang, Y. H. (2023). The 2023 CWBF Checklist of the Birds of Taiwan. In The 2023 CWBF Checklist of the Birds of Taiwan. Chinese Wild Bird Federation. https://www.bird.org.tw/basicpage/87 
+5. Hsiao, M. C., &amp; Li, C. (2015). A Field Guide to the Birds of Taiwan. In A Field Guide to the Birds of Taiwan (2nd ed.). Forest Bureau, Council of Agriculture, Wild Bird Society Of Taipei. 
+6. Madenjian, C. P., Stapanian, M. A., Witzel, L. D., Einhouse, D. W., Pothoven, S. A., &amp; Whitford, H. L. (2011). Evidence for predatory control of the invasive round goby. Biol. Invasions, 13, 987-1002. 
+7. Mangini, G. G., Gandoy, F. A., Areta, J. I., &amp; Blendinger, P. G. (2022). Benefits of foraging in mixed-species flocks depend on species role and foraging strategy. Ibis, 165, 629-646. https://doi.org/10.1111/ibi.13162 
+8. Payne, R. B. (1977). The ecology of brood parasitism in birds. Ann. Rev. Ecol. Syst., 8, 1-28. 
+9. Perrins, C. M., &amp; Birkhead, T. R. (1983). In Avian ecology. 
+10. Pettingill, O. S. (1985). Territory. In Ornithology in Laboratory and Field (Fifth ed., pp. 259-265). Academic Press. 
+11. Severinghaus, L. L., Ding, T. S., Fang, W. H., Lin, W. H., Tsai, M. C., &amp; Yen, C. W. (2012). The Avifauna of Taiwan. In The Avifauna of Taiwan (2nd ed.). Forest Bureau, Council of Agriculture. 
+12. Shiu, H. J., Ding, T. S., Sheu, J. E., Lin, R. S., Koh, C. N., &amp; Lee, P. F. (2005). Morphological Characters of Bird Species in Taiwan. Taiwania, 50(2), 80-92. 
+13. Tobias, J. A., Sheard, C., Pigot, A. L., Devenish, A. J. M., Yang, J., Sayol, F., Neate-Clegg, M. H. C., Alioravainen, N., Weeks, T. L., Barber, R. A., Walkden, P. A., MacGregor, H. E. A., Jones, S. E. I., Vincent, C., Phillips, A. G., Marples, N. M., Montano-Centellas, F. A., Leandro-Silva, V., Claramunt, S., . . . Schleuning, M. (2022). AVONET: morphological, ecological and geographical data for all birds. Ecol. Lett., 25(3), 581-597. 
+14.Tsai, P. Y., Ko, C. J., Hsieh, C., Su, Y. T., Lu, Y. J., Lin, R. S., &amp; Tuanmu, M. N. (2020). A trait dataset for Taiwan&apos;s breeding birds. Biodivers. Data J., 8, e49735. 
+15. Whelan, C. J., Wenny, D. G., &amp; Marquis, R. J. (2008). Ecosystem services provided by birds. Ann. N. Y. Acad. Sci., 1134(1), 25-60.</citation>
+                            </bibliography>
+                                <formationPeriod>2020-2023</formationPeriod>
+                            <dc:replaces>02f3b527-d309-43ee-b964-9713a9ddcd6a/v1.68.xml</dc:replaces>
+                    </gbif>
+                </metadata>
+            </additionalMetadata>
+    </eml:eml>

@@ -1,0 +1,40 @@
+<archive xmlns="http://rs.tdwg.org/dwc/text/" metadata="eml.xml">
+  <core encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.tdwg.org/dwc/terms/Taxon">
+    <files>
+      <location>taxon.txt</location>
+    </files>
+    <id index="0" />
+    <field index="1" term="http://rs.tdwg.org/dwc/terms/taxonID"/>
+    <field index="2" term="http://rs.tdwg.org/dwc/terms/scientificName"/>
+    <field index="3" term="http://rs.tdwg.org/dwc/terms/order"/>
+    <field index="4" term="http://rs.tdwg.org/dwc/terms/family"/>
+    <field index="5" term="http://rs.tdwg.org/dwc/terms/vernacularName"/>
+    <field index="6" term="http://rs.tdwg.org/dwc/terms/taxonRemarks"/>
+    <field index="7" term="http://purl.org/dc/terms/bibliographicCitation"/>
+  </core>
+  <extension encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.iobis.org/obis/terms/ExtendedMeasurementOrFact">
+    <files>
+      <location>extendedmeasurementorfact.txt</location>
+    </files>
+    <coreid index="0" />
+    <field index="1" term="http://rs.tdwg.org/dwc/terms/measurementID"/>
+    <field index="2" term="http://rs.tdwg.org/dwc/terms/measurementType"/>
+    <field index="3" term="http://rs.iobis.org/obis/terms/measurementTypeID"/>
+    <field index="4" term="http://rs.tdwg.org/dwc/terms/measurementValue"/>
+    <field index="5" term="http://rs.tdwg.org/dwc/terms/measurementUnit"/>
+    <field index="6" term="http://rs.tdwg.org/dwc/terms/measurementDeterminedDate"/>
+    <field index="7" term="http://rs.tdwg.org/dwc/terms/measurementDeterminedBy"/>
+    <field index="8" term="http://rs.tdwg.org/dwc/terms/measurementRemarks"/>
+  </extension>
+  <extension encoding="UTF-8" fieldsTerminatedBy="\t" linesTerminatedBy="\n" fieldsEnclosedBy="" ignoreHeaderLines="1" rowType="http://rs.tdwg.org/dwc/terms/MeasurementOrFact">
+    <files>
+      <location>measurementorfacts.txt</location>
+    </files>
+    <coreid index="0" />
+    <field index="1" term="http://rs.tdwg.org/dwc/terms/measurementType"/>
+    <field index="2" term="http://rs.tdwg.org/dwc/terms/measurementValue"/>
+    <field index="3" term="http://rs.tdwg.org/dwc/terms/measurementUnit"/>
+    <field index="4" term="http://rs.tdwg.org/dwc/terms/measurementDeterminedBy"/>
+    <field index="5" term="http://rs.tdwg.org/dwc/terms/measurementRemarks"/>
+  </extension>
+</archive>
