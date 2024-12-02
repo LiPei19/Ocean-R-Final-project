@@ -21,7 +21,7 @@ Dimorphism_ActivityTime_1 <- Dimorphism_ActivityTime %>% separate(col = "measure
                               sep = "_", 
                               into = c("measurement", "Type"))
 
-Dimorphism <- Dimorphism_ActivityTime_1 %>% filter(measurement=="Dimorphism" & Type=="Plumage")
+Dimorphism <- Dimorphism_ActivityTime_1 %>% filter(measurement=="Dimorphism" & Type=="Plumage") 
 Dimorphism_1 <- Dimorphism %>% select(-measurement, -Type) %>% rename("Plumage"=measurementValue)
 
 ActivityTime <- Dimorphism_ActivityTime_1 %>% filter(measurement=="ActivityTime" & measurementValue==1)
@@ -32,3 +32,6 @@ bird_dim_act <- merge(Dimorphism_1, ActivityTime_1, by = "id")
 chisq.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7822
 
 fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295
+
+logistic <- glm(Plumage~Type, data = bird_dim_act, family = binomial)
+summary(logistic)
