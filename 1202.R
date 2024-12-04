@@ -1,6 +1,8 @@
 # 載入所需的套件
-library ("dplyr")
-library ("tidyr")
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggthemes)
 
 # 讀取資料
 bird_1 <- read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/extendedmeasurementorfact.txt", header = TRUE, sep = "\t", fill = TRUE)
@@ -10,7 +12,7 @@ bird_2 <- read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/measurementorf
 bird_3 <- read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 
 
-# 日行性相對於夜行性鳥類 是否比較多的羽色二型性?
+# 日行性相對於夜行性鳥類，是否比較多的羽色二型性?
 
 unique(bird_2$measurementType) # 確認有沒有Dimorphism, ActivityTime相關資料
 
@@ -35,3 +37,22 @@ fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295
 
 logistic <- glm(Plumage~Type, data = bird_dim_act, family = binomial)
 summary(logistic)
+
+data_summary <- bird_dim_act %>%
+  group_by(Type) %>%
+  summarise(Count = n(), Plumage_Proportion = mean(Plumage == 1))
+# Diurnal = 0.3167421, Nocturnal = 0.3364486
+
+ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
+  geom_bar(position = "fill", width = 0.6) +
+  labs(
+    title = "Plumage Dimorphism",
+    x = "Activity Time",
+    y = "Proportion",
+    fill = "Plumage\nDimorphism"
+  ) +
+  scale_fill_manual(values = c("1" = "skyblue", "0" = "lightcoral"),labels = c("0" = "No", "1" = "Yes"))+ 
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()+
+  annotate ("text", x = 2, y = 0.1, label = "n = 107", size = 4, color = "dimgray") +
+  annotate ("text", x = 1, y = 0.1, label = "n = 442", size = 4, color = "dimgray")
