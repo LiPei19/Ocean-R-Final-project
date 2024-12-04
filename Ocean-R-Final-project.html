@@ -358,8 +358,12 @@ Dimorphism in Taiwanese Birds</h1>
 </div>
 
 
-<p>Introduction</p>
-<p>Method</p>
+<p>Introduction I hypothesize that bird flocking behavior differs
+between urban and natural habitats, primarily due to variations in
+predation risk and food resources. (Additional literature will be
+provided to elaborate on the project)</p>
+<p>Methods</p>
+<p>Steps for R code</p>
 <p>Load the necessary packages.</p>
 <pre class="r"><code>library (dplyr)</code></pre>
 <pre><code>## 
@@ -370,7 +374,17 @@ Dimorphism in Taiwanese Birds</h1>
 <pre><code>## 下列物件被遮斷自 &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library (ggplot2)</code></pre>
+<pre class="r"><code>library (ggplot2)
+library (tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ lubridate 1.9.3     ✔ tibble    3.2.1
+## ✔ purrr     1.0.2     ✔ tidyr     1.3.1
+## ✔ readr     2.1.5</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code>bird_2 &lt;- read.table (&quot;D:/碩士資料庫/碩三上課程/Ocean R/Ocean-R-Final-project/dwca-trait_454-v1.68/measurementorfacts.txt&quot;, header = TRUE, sep = &quot;\t&quot;, fill = TRUE)
 
 bird_3 &lt;-  read.table (&quot;D:/碩士資料庫/碩三上課程/Ocean R/Ocean-R-Final-project/dwca-trait_454-v1.68/taxon.txt&quot;, header = TRUE, sep = &quot;\t&quot;, quote = &quot;&quot;, fill = TRUE)</code></pre>
@@ -521,7 +535,197 @@ for no flocking). The sample sizes for each habitat are indicated at the
 bottom, with 20 birds in anthropogenic habitats and 189 birds in natural
 habitats. Asterisks above the bars indicate a statistically significant
 difference.</p>
-<p>Result Figure 1 shows a significant difference in flocking behavior
+<pre class="r"><code># 日行性相對於夜行性鳥類，是否比較多的羽色二型性?
+
+unique(bird_2$measurementType) # 確認有沒有Dimorphism, ActivityTime相關資料</code></pre>
+<pre><code>##   [1] &quot;Territoriality_BreedingSeason&quot;              
+##   [2] &quot;Territoriality_NonBreedingSeason&quot;           
+##   [3] &quot;Behavior_Sally&quot;                             
+##   [4] &quot;Behavior_Glean&quot;                             
+##   [5] &quot;Behavior_Sweep&quot;                             
+##   [6] &quot;Behavior_Sticky&quot;                            
+##   [7] &quot;Behavior_Peck&quot;                              
+##   [8] &quot;Behavior_Suck&quot;                              
+##   [9] &quot;Behavior_Filter&quot;                            
+##  [10] &quot;Behavior_Dive&quot;                              
+##  [11] &quot;Behavior_Flycatch&quot;                          
+##  [12] &quot;Behavior_Stab&quot;                              
+##  [13] &quot;Behavior_SkyToWater&quot;                        
+##  [14] &quot;Behavior_Probe&quot;                             
+##  [15] &quot;Behavior_Fly&quot;                               
+##  [16] &quot;Diet_Plankton&quot;                              
+##  [17] &quot;Diet_Annelid&quot;                               
+##  [18] &quot;Diet_Mollus&quot;                                
+##  [19] &quot;Diet_Hexapod&quot;                               
+##  [20] &quot;Diet_Crustacean&quot;                            
+##  [21] &quot;Diet_Multipod&quot;                              
+##  [22] &quot;Diet_Spider&quot;                                
+##  [23] &quot;Diet_Mammal&quot;                                
+##  [24] &quot;Diet_Bird&quot;                                  
+##  [25] &quot;Diet_Reptiles&quot;                              
+##  [26] &quot;Diet_Amphibian&quot;                             
+##  [27] &quot;Diet_Fish&quot;                                  
+##  [28] &quot;Diet_CarrionTrash&quot;                          
+##  [29] &quot;Diet_Fruit&quot;                                 
+##  [30] &quot;Diet_Nect&quot;                                  
+##  [31] &quot;Diet_Seed&quot;                                  
+##  [32] &quot;Diet_Leaf&quot;                                  
+##  [33] &quot;ForStrat_WatBelowDeep&quot;                      
+##  [34] &quot;ForStrat_WatBelowShallow&quot;                   
+##  [35] &quot;ForStrat_Watsurf&quot;                           
+##  [36] &quot;ForStrat_Mud&quot;                               
+##  [37] &quot;ForStrat_Ground&quot;                            
+##  [38] &quot;ForStrat_Understory&quot;                        
+##  [39] &quot;ForStrat_MidLayer&quot;                          
+##  [40] &quot;ForStrat_Canopy&quot;                            
+##  [41] &quot;ForStrat_Aerial&quot;                            
+##  [42] &quot;ForStrat_Trunk&quot;                             
+##  [43] &quot;Resident&quot;                                   
+##  [44] &quot;Transient&quot;                                  
+##  [45] &quot;Winter&quot;                                     
+##  [46] &quot;Summer&quot;                                     
+##  [47] &quot;Vagrant&quot;                                    
+##  [48] &quot;Introduced&quot;                                 
+##  [49] &quot;Habitat_Forest&quot;                             
+##  [50] &quot;Habitat_ForestEdge&quot;                         
+##  [51] &quot;Habitat_Shrubland&quot;                          
+##  [52] &quot;Habitat_Shortgrass&quot;                         
+##  [53] &quot;Habitat_Tallgrass&quot;                          
+##  [54] &quot;Habitat_MiddleUpperOfStream&quot;                
+##  [55] &quot;Habitat_PermanentInlandDeltas&quot;              
+##  [56] &quot;Habitat_FreshwaterLakesPools&quot;               
+##  [57] &quot;Habitat_TallEmergentMarshes&quot;                
+##  [58] &quot;Habitat_LowEmergentMarshes&quot;                 
+##  [59] &quot;Habitat_RockyArea&quot;                          
+##  [60] &quot;Habitat_SubtidalRockRockyReefs&quot;             
+##  [61] &quot;Habitat_Pelagic&quot;                            
+##  [62] &quot;Habitat_RockyShoreline&quot;                     
+##  [63] &quot;Habitat_SandyPebbleShorelineBeaches&quot;        
+##  [64] &quot;Habitat_Mud_shoreline_intertidal_mudflats&quot;  
+##  [65] &quot;Habitat_DrylandFarming&quot;                     
+##  [66] &quot;Habitat_UrbanParks&quot;                         
+##  [67] &quot;Habitat_UrbanRuralArea&quot;                     
+##  [68] &quot;Habitat_AquaculturePonds&quot;                   
+##  [69] &quot;Habitat_SaltExploitationSites&quot;              
+##  [70] &quot;Habitat_PaddyField&quot;                         
+##  [71] &quot;Elevation_Plain&quot;                            
+##  [72] &quot;Elevation_Low&quot;                              
+##  [73] &quot;Elevation_Middle&quot;                           
+##  [74] &quot;Elevation_High&quot;                             
+##  [75] &quot;BroodParasites&quot;                             
+##  [76] &quot;ColonialBreeding&quot;                           
+##  [77] &quot;Nestsite_CliffBanks&quot;                        
+##  [78] &quot;Nestsite_WithinFoliages&quot;                    
+##  [79] &quot;Nestsite_OnBranches&quot;                        
+##  [80] &quot;Nestsite_InCavity&quot;                          
+##  [81] &quot;Nestsite_EpiphytesAroundTrunk&quot;              
+##  [82] &quot;Nestsite_Shrubs&quot;                            
+##  [83] &quot;Nestsite_SoilSlopeWithVegetation&quot;           
+##  [84] &quot;Nestsite_SoilSlopeWithoutVegetation&quot;        
+##  [85] &quot;Nestsite_ThickTallgrass&quot;                    
+##  [86] &quot;Nestsite_Ground&quot;                            
+##  [87] &quot;Nestsite_OnWaterbody&quot;                       
+##  [88] &quot;Nestsite_ArtificialStructures&quot;              
+##  [89] &quot;Neststructure_Scrape&quot;                       
+##  [90] &quot;Neststructure_Platform&quot;                     
+##  [91] &quot;Neststructure_Cup&quot;                          
+##  [92] &quot;Neststructure_Dome&quot;                         
+##  [93] &quot;Neststructure_Bag&quot;                          
+##  [94] &quot;Neststructure_DomeWithTunnel&quot;               
+##  [95] &quot;Neststructure_PrimaryCavity&quot;                
+##  [96] &quot;Neststructure_SecondaryCavity&quot;              
+##  [97] &quot;ClutchSizeMean&quot;                             
+##  [98] &quot;EcosystemServices_Pollination&quot;              
+##  [99] &quot;EcosystemServices_SeedDispersal&quot;            
+## [100] &quot;EcosystemServices_InsectControl&quot;            
+## [101] &quot;EcosystemServices_RegulationInvasiveSpecies&quot;
+## [102] &quot;ActivityTime_Diurnal&quot;                       
+## [103] &quot;ActivityTime_Nocturnal&quot;                     
+## [104] &quot;Flocks_ConspecificsBreedingSeason&quot;          
+## [105] &quot;Flocks_ConspecificsNonBreedingSeason&quot;       
+## [106] &quot;Flocks_Mixed.speciesNonBreedingSeason&quot;      
+## [107] &quot;Weight&quot;                                     
+## [108] &quot;Billlength&quot;                                 
+## [109] &quot;Bodylength&quot;                                 
+## [110] &quot;Headlength&quot;                                 
+## [111] &quot;Taillength&quot;                                 
+## [112] &quot;Tarsuslength&quot;                               
+## [113] &quot;Winglength&quot;                                 
+## [114] &quot;Dimorphism_Plumage&quot;                         
+## [115] &quot;Dimorphism_Size&quot;</code></pre>
+<pre class="r"><code>Dimorphism_ActivityTime &lt;- subset(bird_2, grepl(&quot;Dimorphism|ActivityTime&quot;, measurementType))
+# grepl 的使用在這裡是因為需要進行 部分文字匹配，而不是直接篩選一個完整的值。
+
+Dimorphism_ActivityTime_1 &lt;- Dimorphism_ActivityTime %&gt;% separate(col = &quot;measurementType&quot;, 
+                              sep = &quot;_&quot;, 
+                              into = c(&quot;measurement&quot;, &quot;Type&quot;))
+
+Dimorphism &lt;- Dimorphism_ActivityTime_1 %&gt;% filter(measurement==&quot;Dimorphism&quot; &amp; Type==&quot;Plumage&quot;) 
+Dimorphism_1 &lt;- Dimorphism %&gt;% select(-measurement, -Type) %&gt;% rename(&quot;Plumage&quot;=measurementValue)
+
+ActivityTime &lt;- Dimorphism_ActivityTime_1 %&gt;% filter(measurement==&quot;ActivityTime&quot; &amp; measurementValue==1)
+ActivityTime_1 &lt;- ActivityTime %&gt;% select(id, Type)
+
+bird_dim_act &lt;- merge(Dimorphism_1, ActivityTime_1, by = &quot;id&quot;)
+
+chisq.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7822</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test with Yates&#39; continuity correction
+## 
+## data:  bird_dim_act$Type and bird_dim_act$Plumage
+## X-squared = 0.076443, df = 1, p-value = 0.7822</code></pre>
+<pre class="r"><code>fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295</code></pre>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  bird_dim_act$Type and bird_dim_act$Plumage
+## p-value = 0.7295
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.6766776 1.7462232
+## sample estimates:
+## odds ratio 
+##    1.09358</code></pre>
+<pre class="r"><code>logistic &lt;- glm(Plumage~Type, data = bird_dim_act, family = binomial)
+summary(logistic)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = Plumage ~ Type, family = binomial, data = bird_dim_act)
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   -0.76878    0.10225  -7.519 5.52e-14 ***
+## TypeNocturnal  0.08962    0.22873   0.392    0.695    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 688.78  on 548  degrees of freedom
+## Residual deviance: 688.63  on 547  degrees of freedom
+## AIC: 692.63
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<pre class="r"><code>data_summary &lt;- bird_dim_act %&gt;%
+  group_by(Type) %&gt;%
+  summarise(Count = n(), Plumage_Proportion = mean(Plumage == 1))
+# Diurnal = 0.3167421, Nocturnal = 0.3364486
+
+ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
+  geom_bar(position = &quot;fill&quot;, width = 0.6) +
+  labs(
+    title = &quot;Plumage Dimorphism&quot;,
+    x = &quot;Activity Time&quot;,
+    y = &quot;Proportion&quot;,
+    fill = &quot;Plumage\nDimorphism&quot;
+  ) +
+  scale_fill_manual(values = c(&quot;1&quot; = &quot;skyblue&quot;, &quot;0&quot; = &quot;lightcoral&quot;),labels = c(&quot;0&quot; = &quot;No&quot;, &quot;1&quot; = &quot;Yes&quot;))+ 
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()+
+  annotate (&quot;text&quot;, x = 2, y = 0.1, label = &quot;n = 107&quot;, size = 4, color = &quot;dimgray&quot;) +
+  annotate (&quot;text&quot;, x = 1, y = 0.1, label = &quot;n = 442&quot;, size = 4, color = &quot;dimgray&quot;)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" />
+Results Figure 1 shows a significant difference in flocking behavior
 between birds from different habitats, with a higher proportion of birds
 exhibiting flocking behavior in natural habitats compared to
 anthropogenic habitats. The Chi-squared test revealed a significant
@@ -533,7 +737,8 @@ analysis further supported this finding, indicating that birds in
 natural habitats have a significantly higher probability of flocking
 behavior compared to those in anthropogenic habitats (estimate = -1.78,
 p = 0.019).</p>
-<p>Disscussion?</p>
+<p>Disscussion</p>
+<p>References</p>
 
 
 

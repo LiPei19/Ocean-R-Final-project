@@ -6,7 +6,7 @@ output: html_document
 ---
 
 Introduction
-I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on 
+I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on the project)
 
 
 
@@ -18,6 +18,7 @@ Load the necessary packages.
 ```{r}
 library (dplyr)
 library (ggplot2)
+library (tidyverse)
 ```
 
 ```{r}
@@ -146,6 +147,52 @@ ggplot(stacked_data, aes(x = majority_habitat, y = percentage, fill = as.factor 
 Figure 1. The Impact of Habitat on Bird Flocking Behavior
 This figure presents the proportion of birds exhibiting flocking behavior during the non-breeding season across different habitats, classified as either anthropogenic habitat (e.g., farmland, urban parks) or natural habitat. The data are shown as a stacked bar plot, where the colors of the bars represent whether flocking behavior was observed (red for flocking, blue for no flocking). The sample sizes for each habitat are indicated at the bottom, with 20 birds in anthropogenic habitats and 189 birds in natural habitats. Asterisks above the bars indicate a statistically significant difference.
 
+```{r}
+# 日行性相對於夜行性鳥類，是否比較多的羽色二型性?
+
+unique(bird_2$measurementType) # 確認有沒有Dimorphism, ActivityTime相關資料
+
+Dimorphism_ActivityTime <- subset(bird_2, grepl("Dimorphism|ActivityTime", measurementType))
+# grepl 的使用在這裡是因為需要進行 部分文字匹配，而不是直接篩選一個完整的值。
+
+Dimorphism_ActivityTime_1 <- Dimorphism_ActivityTime %>% separate(col = "measurementType", 
+                              sep = "_", 
+                              into = c("measurement", "Type"))
+
+Dimorphism <- Dimorphism_ActivityTime_1 %>% filter(measurement=="Dimorphism" & Type=="Plumage") 
+Dimorphism_1 <- Dimorphism %>% select(-measurement, -Type) %>% rename("Plumage"=measurementValue)
+
+ActivityTime <- Dimorphism_ActivityTime_1 %>% filter(measurement=="ActivityTime" & measurementValue==1)
+ActivityTime_1 <- ActivityTime %>% select(id, Type)
+
+bird_dim_act <- merge(Dimorphism_1, ActivityTime_1, by = "id")
+
+chisq.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7822
+
+fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295
+
+logistic <- glm(Plumage~Type, data = bird_dim_act, family = binomial)
+summary(logistic)
+
+data_summary <- bird_dim_act %>%
+  group_by(Type) %>%
+  summarise(Count = n(), Plumage_Proportion = mean(Plumage == 1))
+# Diurnal = 0.3167421, Nocturnal = 0.3364486
+
+ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
+  geom_bar(position = "fill", width = 0.6) +
+  labs(
+    title = "Plumage Dimorphism",
+    x = "Activity Time",
+    y = "Proportion",
+    fill = "Plumage\nDimorphism"
+  ) +
+  scale_fill_manual(values = c("1" = "skyblue", "0" = "lightcoral"),labels = c("0" = "No", "1" = "Yes"))+ 
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal()+
+  annotate ("text", x = 2, y = 0.1, label = "n = 107", size = 4, color = "dimgray") +
+  annotate ("text", x = 1, y = 0.1, label = "n = 442", size = 4, color = "dimgray")
+```
 Results
 Figure 1 shows a significant difference in flocking behavior between birds from different habitats, with a higher proportion of birds exhibiting flocking behavior in natural habitats compared to anthropogenic habitats. The Chi-squared test revealed a significant difference in flocking behavior between habitats (χ² = 5.63, df = 1, p = 0.017). Additionally, Fisher's Exact Test confirmed this result, showing a significant difference in flocking behavior between habitats (p = 0.007, 95% CI: 0.0186–0.743). The Generalized Linear Model (GLM) analysis further supported this finding, indicating that birds in natural habitats have a significantly higher probability of flocking behavior compared to those in anthropogenic habitats (estimate = -1.78, p = 0.019).
 
