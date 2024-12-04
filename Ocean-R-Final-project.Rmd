@@ -1,14 +1,12 @@
 ---
 title: "A Study on Flocking behavior and Sexual Dimorphism in Taiwanese Birds"
-author: "Ming Pei Li"
+author: "Ming Pei Li 61143008S, Weiting Sun"
 date: "2024-12-01"
 output: html_document
 ---
 
 Introduction
-I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on 
-
-
+I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on the project)
 
 Methods
 
