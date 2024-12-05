@@ -1,6 +1,6 @@
 ---
 title: "A Study on Flocking behavior and Sexual Dimorphism in Taiwanese Birds"
-author: "Ming-Pei Li, Wei-Ting Sun"
+author: "Ming-Pei Li 61143008S, Wei-Ting Sun 61343013S"
 date: "2024-12-01"
 output: html_document
 ---
@@ -20,9 +20,9 @@ library (tidyr)
 ```
 
 ```{r, warning = FALSE, message = FALSE}
-bird_2 <- read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/measurementorfacts.txt", header = TRUE, sep = "\t", fill = TRUE)
+bird_2 <- read.table ("dwca-trait_454-v1.68/measurementorfacts.txt", header = TRUE, sep = "\t", fill = TRUE)
 
-bird_3 <-  read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
+bird_3 <-  read.table ("dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 ```
 
 Filter the bird data for conspecific flocking behavior during the non-breeding season.
