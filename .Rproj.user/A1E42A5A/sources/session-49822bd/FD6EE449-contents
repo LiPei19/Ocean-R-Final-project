@@ -1,61 +1,44 @@
 ---
 title: "A Study on Flocking behavior and Sexual Dimorphism in Taiwanese Birds"
-<<<<<<< HEAD
 author: "Ming Pei Li 61143008S, Weiting Sun"
-=======
-author: "Ming-Pei Li, Wei-Ting Sun"
->>>>>>> 65ec2ef2131865ebfbe3225f7cc2b278560c1bb7
 date: "2024-12-01"
 output: html_document
 ---
 
-<<<<<<< HEAD
 Introduction
 I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on the project)
 
 Methods
 
 Steps for R code
-=======
-## Introduction
-I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on 
-
-## Methods
-
-#### Steps for R code
->>>>>>> 65ec2ef2131865ebfbe3225f7cc2b278560c1bb7
 
 Load the necessary packages.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 library (dplyr)
 library (ggplot2)
-<<<<<<< HEAD
 library (tidyverse)
-=======
-library (tidyr)
->>>>>>> 65ec2ef2131865ebfbe3225f7cc2b278560c1bb7
 ```
 
-```{r, warning = FALSE, message = FALSE}
-bird_2 <- read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/measurementorfacts.txt", header = TRUE, sep = "\t", fill = TRUE)
+```{r}
+bird_2 <- read.table ("D:/碩士資料庫/碩三上課程/Ocean R/Ocean-R-Final-project/dwca-trait_454-v1.68/measurementorfacts.txt", header = TRUE, sep = "\t", fill = TRUE)
 
-bird_3 <-  read.table ("Ocean-R-Final-project/dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
+bird_3 <-  read.table ("D:/碩士資料庫/碩三上課程/Ocean R/Ocean-R-Final-project/dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 ```
 
 Filter the bird data for conspecific flocking behavior during the non-breeding season.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 co_flocks_nbd <- bird_2 %>% 
   filter (measurementType %in% c("Flocks_ConspecificsNonBreedingSeason"))
 ```
 
 Filter the bird data for non-territorial birds during the non-breeding season.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 nt_nbs <- bird_2 %>% 
   filter (measurementType == "Territoriality_NonBreedingSeason" & measurementValue == 0)
 ```
 
 Classify birds living in anthropogenic habitats (such as farmlands, urban parks, etc.) as "Anthropogenic habitat." Classify birds not living in these anthropogenic habitats as "Natural habitat."
-```{r, warning = FALSE, message = FALSE}
+```{r}
 human_habitat <- bird_2 %>% 
   filter (measurementType %in% 
             c("Habitat_DrylandFarming",
@@ -81,7 +64,7 @@ nonhuman_habitat <- bird_2 %>%
 
 
 Combine all habitat data and determine the primary habitat (either natural or anthropogenic) for each bird.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 maj_habitat <- 
   rbind (nonhuman_habitat, human_habitat) %>% 
   group_by (id, habitat) %>%
@@ -92,7 +75,7 @@ maj_habitat <-
 ```
 
 Merge the flocking behavior data with the primary habitat data and filter for non-territorial birds during the non-breeding season.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 co_flock_habitat <- co_flocks_nbd %>%
   inner_join (maj_habitat, by = "id") %>% 
   inner_join(bird_3, by = "id") %>% 
@@ -100,17 +83,17 @@ co_flock_habitat <- co_flocks_nbd %>%
 ```
 
 Use the Chi-squared test to compare whether birds from different habitats (natural vs. anthropogenic) show significant differences in flocking behavior.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 chisq.test (co_flock_habitat$measurementValue, co_flock_habitat$majority_habitat)
 ```
 
 Use Fisher's Exact Test to compare whether birds from different habitats (natural vs. anthropogenic) show significant differences in flocking behavior, applicable for small sample sizes.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 fisher.test (co_flock_habitat$measurementValue, co_flock_habitat$majority_habitat)
 ```
 
 Use a Generalized Linear Model (GLM) with bird flocking behavior (yes/no) as the dependent variable and primary habitat (natural or anthropogenic) as the independent variable to further examine the impact of habitat on flocking behavior.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 bird_glm <- glm (measurementValue ~ majority_habitat,
                  data = co_flock_habitat, 
                  family = binomial)
@@ -118,7 +101,7 @@ summary (bird_glm)
 ```
 
 Calculate the frequency of combinations between different habitats and whether flocking behavior (yes/no) is present.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 stacked_data <- co_flock_habitat %>%
   group_by (majority_habitat, measurementValue) %>%
   summarise (count = n ()) %>%
@@ -126,14 +109,14 @@ stacked_data <- co_flock_habitat %>%
 ```
 
 Calculate the proportion of birds exhibiting flocking behavior in different habitats.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 stacked_data <- stacked_data %>%
   group_by (majority_habitat) %>%
   mutate (percentage = count / sum (count))
 ```
 
 Plot the proportion of birds exhibiting flocking behavior by habitat type using a stacked bar chart.
-```{r, warning = FALSE, message = FALSE}
+```{r}
 ggplot(stacked_data, aes(x = majority_habitat, y = percentage, fill = as.factor (measurementValue))) +
   geom_bar(stat = "identity", position = "stack", width = 0.6) +
   scale_fill_manual(values = c("1" = "skyblue", "0" = "lightcoral"),
@@ -162,15 +145,10 @@ ggplot(stacked_data, aes(x = majority_habitat, y = percentage, fill = as.factor 
 Figure 1. The Impact of Habitat on Bird Flocking Behavior
 This figure presents the proportion of birds exhibiting flocking behavior during the non-breeding season across different habitats, classified as either anthropogenic habitat (e.g., farmland, urban parks) or natural habitat. The data are shown as a stacked bar plot, where the colors of the bars represent whether flocking behavior was observed (red for flocking, blue for no flocking). The sample sizes for each habitat are indicated at the bottom, with 20 birds in anthropogenic habitats and 189 birds in natural habitats. Asterisks above the bars indicate a statistically significant difference.
 
-<<<<<<< HEAD
 ```{r}
 # 日行性相對於夜行性鳥類，是否比較多的羽色二型性?
 
 unique(bird_2$measurementType) # 確認有沒有Dimorphism, ActivityTime相關資料
-=======
-```{r, warning = FALSE, message = FALSE}
-# Is there more plumage dimorphism in diurnal versus nocturnal birds?
->>>>>>> 65ec2ef2131865ebfbe3225f7cc2b278560c1bb7
 
 Dimorphism_ActivityTime <- subset(bird_2, grepl("Dimorphism|ActivityTime", measurementType))
 # grepl 的使用在這裡是因為需要進行 部分文字匹配，而不是直接篩選一個完整的值。
@@ -213,17 +191,10 @@ ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
   annotate ("text", x = 2, y = 0.1, label = "n = 107", size = 4, color = "dimgray") +
   annotate ("text", x = 1, y = 0.1, label = "n = 442", size = 4, color = "dimgray")
 ```
-<<<<<<< HEAD
 Results
-=======
-
-Figure 2. Percentage of plumage colour dimorphism in birds with different activity times
-
-## Results
->>>>>>> 65ec2ef2131865ebfbe3225f7cc2b278560c1bb7
 Figure 1 shows a significant difference in flocking behavior between birds from different habitats, with a higher proportion of birds exhibiting flocking behavior in natural habitats compared to anthropogenic habitats. The Chi-squared test revealed a significant difference in flocking behavior between habitats (χ² = 5.63, df = 1, p = 0.017). Additionally, Fisher's Exact Test confirmed this result, showing a significant difference in flocking behavior between habitats (p = 0.007, 95% CI: 0.0186–0.743). The Generalized Linear Model (GLM) analysis further supported this finding, indicating that birds in natural habitats have a significantly higher probability of flocking behavior compared to those in anthropogenic habitats (estimate = -1.78, p = 0.019).
 
-## Disscussion
+Disscussion
 
 
-## References
+References
