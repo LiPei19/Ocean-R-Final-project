@@ -25,6 +25,8 @@ bird_2 <- read.table ("dwca-trait_454-v1.68/measurementorfacts.txt", header = TR
 bird_3 <-  read.table ("dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 ```
 
+*Hypothesis 1:*
+
 Filter the bird data for conspecific flocking behavior during the non-breeding season.
 ```{r, warning = FALSE, message = FALSE}
 co_flocks_nbd <- bird_2 %>% 
@@ -145,8 +147,10 @@ ggplot(stacked_data, aes(x = majority_habitat, y = percentage, fill = as.factor 
 Figure 1. The Impact of Habitat on Bird Flocking Behavior
 This figure presents the proportion of birds exhibiting flocking behavior during the non-breeding season across different habitats, classified as either anthropogenic habitat (e.g., farmland, urban parks) or natural habitat. The data are shown as a stacked bar plot, where the colors of the bars represent whether flocking behavior was observed (red for flocking, blue for no flocking). The sample sizes for each habitat are indicated at the bottom, with 20 birds in anthropogenic habitats and 189 birds in natural habitats. Asterisks above the bars indicate a statistically significant difference.
 
+*Hypothesis 2: There is more plumage dimorphism in diurnal versus nocturnal birds.*
+
 ```{r, warning = FALSE, message = FALSE}
-# Is there more plumage dimorphism in diurnal versus nocturnal birds?
+
 
 Dimorphism_ActivityTime <- subset(bird_2, grepl("Dimorphism|ActivityTime", measurementType))
 # grepl 的使用在這裡是因為需要進行 部分文字匹配，而不是直接篩選一個完整的值。
@@ -162,9 +166,18 @@ ActivityTime <- Dimorphism_ActivityTime_1 %>% filter(measurement=="ActivityTime"
 ActivityTime_1 <- ActivityTime %>% select(id, Type)
 
 bird_dim_act <- merge(Dimorphism_1, ActivityTime_1, by = "id")
+```
+
+Use the Fisher's Exact Test to compare whether birds with different active times (diurnal vs. nocturnal birds) show significant differences in plumage dimorphism.
+
+```{r, warning = FALSE, message = FALSE}
 
 chisq.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7822
+```
 
+Use the Chi-squared test to compare whether birds with different active times (diurnal vs. nocturnal birds) show significant differences in plumage dimorphism, applicable for small sample sizes.
+
+```{r, warning = FALSE, message = FALSE}
 fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295
 
 logistic <- glm(Plumage~Type, data = bird_dim_act, family = binomial)
