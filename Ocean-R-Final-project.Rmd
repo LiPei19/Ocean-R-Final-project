@@ -9,7 +9,11 @@ output: html_document
 
 ### Topic 1: Flocking behavior
 
-I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on 
+Flocking behavior in birds plays a critical role in their survival, as studies have demonstrated that birds in obligate flocks exhibit higher survival rates compared to solitary foragers, supporting the adaptive value of flocking (Jullien & Clobert, 2000). Avian flocking behavior is influenced by multiple factors, primarily predation avoidance and foraging efficiency (Jaime & Zuluaga, 2013). In high predation risk areas, birds tend to form larger, more compact flocks and exhibit increased vigilance behaviors (Barbosa, 1997). This connection between predation and flocking is further supported by the reduced tendency to flock and smaller flock sizes observed in bird species inhabiting islands with relaxed predation pressure (Beauchamp, 2004). However, the persistence of flocking in some island species indicates that other factors, such as foraging benefits, also contribute to maintaining flocking behavior (Beauchamp, 2004; Jaime & Zuluaga, 2013). As human development continues to alter natural landscapes, changes in bird flocking behavior may occur.
+
+For instance, habitat fragmentation in Amazonian rainforests negatively affects flock interaction networks, leading to a decline in association frequencies and reduced flock cohesion in disturbed areas (Mokross et al., 2014). Similarly, urban environments, characterized by lower predation risk, are associated with smaller and less compact flocks compared to rural counterparts (Carere et al., 2009). Additionally, urban habitats provide reliable food sources, resulting in more consistent foraging patterns and social networks among urban birds (Jones et al., 2019).
+
+Building on these findings, we hypothesize that bird flocking behavior differs between anthropogenic and natural habitats due to variations in predation risk and food resource availability. Specifically, anthropogenic habitats, with their lower predation risk and consistent food supply, are likely to support less flocking behavior among birds compared to natural habitats. To study this question, we analyze data from bird populations in Taiwan to investigate differences in flocking behavior across anthropogenic and natural habitats. 
 
 ### Topic 2: Sexual Dimorphism
 
@@ -223,12 +227,26 @@ Figure 1 shows a significant difference in flocking behavior between birds from 
 
 
 ## References
+Barbosa, A. (1997). The effects of predation risk on scanning and flocking behavior in dunlin. https://digital.csic.es/handle/10261/9360
+
+Beauchamp, G. (2004). Reduced Flocking by Birds on Islands with Relaxed Predation. Proceedings: Biological Sciences, 271(1543), 1039–1042.
+
+Carere, C., Montanino, S., Moreschini, F., Zoratto, F., Chiarotti, F., Santucci, D., & Alleva, E. (2009). Aerial flocking patterns of wintering starlings, Sturnus vulgaris, under different predation risk. Animal Behaviour, 77(1), 101–107. https://doi.org/10.1016/j.anbehav.2008.08.034
+
 Dunn, P. O., Whittingham, L. A., & Pitcher, T. E. (2001). MATING SYSTEMS, SPERM COMPETITION, AND THE EVOLUTION OF SEXUAL DIMORPHISM IN BIRDS. Evolution, 55(1), 161–175. https://doi.org/10.1111/j.0014-3820.2001.tb01281.x
 
 Galeotti, P., Rubolini, D., Dunn, P. O., & Fasola, M. (2003). Colour polymorphism in birds: Causes and functions. Journal of Evolutionary Biology, 16(4), 635–646. https://doi.org/10.1046/j.1420-9101.2003.00569.x
 
 Hall, M. I., & Ross, C. F. (2007). Eye shape and activity pattern in birds. Journal of Zoology, 271(4), 437–444. https://doi.org/10.1111/j.1469-7998.2006.00227.x
 
+Jaime, G., & Zuluaga, C.J. (2013). WHY ANIMALS COME TOGETHER, WITH THE SPECIAL CASE OF MIXED-SPECIES BIRD FLOCKS.
+
+Jones, T. B., Evans, J. C., & Morand-Ferron, J. (2019). Urbanization and the temporal patterns of social networks and group foraging behaviors. Ecology and Evolution, 9(8), 4589–4602. https://doi.org/10.1002/ece3.5060
+
+Jullien, M., & Clobert, J. (2000). The Survival Value of Flocking in Neotropical Birds: Reality or Fiction? Ecology, 81(12), 3416–3430. https://doi.org/10.1890/0012-9658(2000)081[3416:TSVOFI]2.0.CO;2
+
 Martin, T. E., & Badyaev, A. V. (1996). SEXUAL DICHROMATISM IN BIRDS: IMPORTANCE OF NEST PREDATION AND NEST LOCATION FOR FEMALES VERSUS MALES. Evolution, 50(6), 2454–2460. https://doi.org/10.1111/j.1558-5646.1996.tb03631.x
+
+Mokross, K., Ryder, T. B., Côrtes, M. C., Wolfe, J. D., & Stouffer, P. C. (2014). Decay of interspecific avian flock networks along a disturbance gradient in Amazonia. Proceedings of the Royal Society B: Biological Sciences, 281(1776), 20132599. https://doi.org/10.1098/rspb.2013.2599
 
 Owens, I. P. F., & Hartley, I. R. (1998). Sexual dimorphism in birds: Why are there so many different forms of dimorphism? Proceedings of the Royal Society of London. Series B: Biological Sciences, 265(1394), 397–407. https://doi.org/10.1098/rspb.1998.0308
