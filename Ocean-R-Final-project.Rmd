@@ -6,7 +6,18 @@ output: html_document
 ---
 
 ## Introduction
+
+### Topic 1: Flocking behavior
+
 I hypothesize that bird flocking behavior differs between urban and natural habitats, primarily due to variations in predation risk and food resources. (Additional literature will be provided to elaborate on 
+
+### Topic 2: Sexual Dimorphism
+
+Research on plumage dimorphism in birds reveals complex relationships with activity patterns and environmental factors. Studies have shown that different forms of dimorphism are associated with various aspects of avian behavior and ecology. Plumage-color dimorphism is linked to extra-pair paternity rates (Owens & Hartley, 1998). Nest predation may constrain female plumage brightness more than male plumage, particularly in species where only females incubate (Martin & Badyaev, 1996). Social mating systems strongly influence multiple forms of dimorphism, with polygynous and lekking species showing greater dimorphism than monogamous ones (Dunn et al., 2001).
+
+Color polymorphism in birds, occurring in 3.5% of species, is most prevalent in certain orders and may be maintained by disruptive selection related to detectability under variable light conditions (Galeotti et al., 2003). Activity patterns significantly influence eye morphology in birds, with nocturnal species having larger corneal diameters relative to axial lengths for enhanced visual sensitivity, while diurnal birds have larger axial lengths for improved visual acuity (Hall & Ross, 2007). 
+
+However, the relationship between avian activity time and plumage dimorphism has yet to be thoroughly investigated. Therefore, this study aims to examine whether there is a significant association between the activity time of birds and their plumage dimorphism.
 
 ## Methods
 
@@ -212,3 +223,12 @@ Figure 1 shows a significant difference in flocking behavior between birds from 
 
 
 ## References
+Dunn, P. O., Whittingham, L. A., & Pitcher, T. E. (2001). MATING SYSTEMS, SPERM COMPETITION, AND THE EVOLUTION OF SEXUAL DIMORPHISM IN BIRDS. Evolution, 55(1), 161–175. https://doi.org/10.1111/j.0014-3820.2001.tb01281.x
+
+Galeotti, P., Rubolini, D., Dunn, P. O., & Fasola, M. (2003). Colour polymorphism in birds: Causes and functions. Journal of Evolutionary Biology, 16(4), 635–646. https://doi.org/10.1046/j.1420-9101.2003.00569.x
+
+Hall, M. I., & Ross, C. F. (2007). Eye shape and activity pattern in birds. Journal of Zoology, 271(4), 437–444. https://doi.org/10.1111/j.1469-7998.2006.00227.x
+
+Martin, T. E., & Badyaev, A. V. (1996). SEXUAL DICHROMATISM IN BIRDS: IMPORTANCE OF NEST PREDATION AND NEST LOCATION FOR FEMALES VERSUS MALES. Evolution, 50(6), 2454–2460. https://doi.org/10.1111/j.1558-5646.1996.tb03631.x
+
+Owens, I. P. F., & Hartley, I. R. (1998). Sexual dimorphism in birds: Why are there so many different forms of dimorphism? Proceedings of the Royal Society of London. Series B: Biological Sciences, 265(1394), 397–407. https://doi.org/10.1098/rspb.1998.0308
