@@ -2,27 +2,30 @@
 title: "A Study on Flocking behavior and Sexual Dimorphism in Taiwanese Birds"
 author: "Ming-Pei Li 61143008S, Wei-Ting Sun 61343013S"
 date: "2024-12-01"
-output: html_document
+output:
+  pagedown::html_paged:
+    number_sections: true   # 是否為每一節編號
+fontsize: 12pt             # 設定字體大小
+mainfont: "Times New Roman" # 設定字型
+latex_engine: xelatex
 ---
+\newpage
 
 ## Introduction
 
 ### Topic 1: Flocking behavior
 
 Flocking behavior in birds plays a critical role in their survival, as studies have demonstrated that birds in obligate flocks exhibit higher survival rates compared to solitary foragers, supporting the adaptive value of flocking (Jullien & Clobert, 2000). Avian flocking behavior is influenced by multiple factors, primarily predation avoidance and foraging efficiency (Jaime & Zuluaga, 2013). In high predation risk areas, birds tend to form larger, more compact flocks and exhibit increased vigilance behaviors (Barbosa, 1997). This connection between predation and flocking is further supported by the reduced tendency to flock and smaller flock sizes observed in bird species inhabiting islands with relaxed predation pressure (Beauchamp, 2004). However, the persistence of flocking in some island species indicates that other factors, such as foraging benefits, also contribute to maintaining flocking behavior (Beauchamp, 2004; Jaime & Zuluaga, 2013). As human development continues to alter natural landscapes, changes in bird flocking behavior may occur.
-
 For instance, habitat fragmentation in Amazonian rainforests negatively affects flock interaction networks, leading to a decline in association frequencies and reduced flock cohesion in disturbed areas (Mokross et al., 2014). Similarly, urban environments, characterized by lower predation risk, are associated with smaller and less compact flocks compared to rural counterparts (Carere et al., 2009). Additionally, urban habitats provide reliable food sources, resulting in more consistent foraging patterns and social networks among urban birds (Jones et al., 2019).
-
 Building on these findings, we hypothesize that bird flocking behavior differs between anthropogenic and natural habitats due to variations in predation risk and food resource availability. Specifically, anthropogenic habitats, with their lower predation risk and consistent food supply, are likely to support less flocking behavior among birds compared to natural habitats. To study this question, we analyze data from bird populations in Taiwan to investigate differences in flocking behavior across anthropogenic and natural habitats. 
 
 ### Topic 2: Sexual Dimorphism
 
 Research on plumage dimorphism in birds reveals complex relationships with activity patterns and environmental factors. Studies have shown that different forms of dimorphism are associated with various aspects of avian behavior and ecology. Plumage-color dimorphism is linked to extra-pair paternity rates (Owens & Hartley, 1998). Nest predation may constrain female plumage brightness more than male plumage, particularly in species where only females incubate (Martin & Badyaev, 1996). Social mating systems strongly influence multiple forms of dimorphism, with polygynous and lekking species showing greater dimorphism than monogamous ones (Dunn et al., 2001).
-
 Color polymorphism in birds, occurring in 3.5% of species, is most prevalent in certain orders and may be maintained by disruptive selection related to detectability under variable light conditions (Galeotti et al., 2003). Activity patterns significantly influence eye morphology in birds, with nocturnal species having larger corneal diameters relative to axial lengths for enhanced visual sensitivity, while diurnal birds have larger axial lengths for improved visual acuity (Hall & Ross, 2007). 
-
 However, the relationship between avian activity time and plumage dimorphism has yet to be thoroughly investigated. Therefore, this study aims to examine whether there is a significant association between the activity time of birds and their plumage dimorphism.
 
+\newpage
 ## Methods
 
 #### Steps for R code
@@ -32,6 +35,7 @@ Load the necessary packages.
 library (dplyr)
 library (ggplot2)
 library (tidyr)
+library (mvabund)
 ```
 
 ```{r, warning = FALSE, message = FALSE}
@@ -40,7 +44,8 @@ bird_2 <- read.table ("dwca-trait_454-v1.68/measurementorfacts.txt", header = TR
 bird_3 <-  read.table ("dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 ```
 
-*Hypothesis 1:*
+\newpage
+*Hypothesis 1: Birds exhibit less flocking behavior  in anthropogenic habitats compared to natural habitats, due to reduced predation risk and more stable food resource availability in anthropogenic environments.*
 
 Filter the bird data for conspecific flocking behavior during the non-breeding season.
 ```{r, warning = FALSE, message = FALSE}
@@ -54,7 +59,7 @@ nt_nbs <- bird_2 %>%
   filter (measurementType == "Territoriality_NonBreedingSeason" & measurementValue == 0)
 ```
 
-Classify birds living in anthropogenic habitats (such as farmlands, urban parks, etc.) as "Anthropogenic habitat." Classify birds not living in these anthropogenic habitats as "Natural habitat."
+Birds living in anthropogenic habitats, such as dryland farming and urban parks, are classified as 'Anthropogenic habitat.' Birds not living in these anthropogenic habitats are classified as 'Natural habitat.'
 ```{r, warning = FALSE, message = FALSE}
 human_habitat <- bird_2 %>% 
   filter (measurementType %in% 
@@ -91,43 +96,71 @@ maj_habitat <-
   select (id, majority_habitat = habitat)
 ```
 
-Merge the flocking behavior data with the primary habitat data and filter for non-territorial birds during the non-breeding season.
+Merge the flocking behavior data with the primary habitat data and filter for non-territorial birds during the non-breeding season. We focus on non-territorial birds during this period because we believe that territorial birds, such as eagles, do not exhibit flocking behavior during the non-breeding season. Therefore, we choose non-territorial birds for analysis.
 ```{r, warning = FALSE, message = FALSE}
 co_flock_habitat <- co_flocks_nbd %>%
   inner_join (maj_habitat, by = "id") %>% 
   inner_join(bird_3, by = "id") %>% 
   filter (id %in% nt_nbs$id)
 ```
+Categorical data can be analyzed using the Chi-square test, Fisher's exact test, and Generalized Linear Model. We need to confirm whether the assumptions of each test are met by the bird data.
 
-Use the Chi-squared test to compare whether birds from different habitats (natural vs. anthropogenic) show significant differences in flocking behavior.
+The assumptions for the Chi-square test and Fisher's exact test are as follows:
+1. Both variables are categorical.
+2. Observations are independent.
+3. Cells in the contingency table are mutually exclusive.
+4. The expected value in at least 80% of the cells should be 5 or greater. If any expected value is less than 5, Fisher's exact test should be used instead.
+\newpage
+The bird data currently satisfies the first three assumptions. Therefore, we calculate whether the expected value in at least 80% of the cells is greater than or less than 5 to decide whether to use the Chi-square test or Fisher's exact test.
+
+Create a contingency table
 ```{r, warning = FALSE, message = FALSE}
+flock_table <- matrix(
+  c(sum (co_flock_habitat$majority_habitat == "Natural habitat" & co_flock_habitat$measurementValue == 1), 
+    sum (co_flock_habitat$majority_habitat == "Anthropogenic habitat" & co_flock_habitat$measurementValue == 1), 
+    sum (co_flock_habitat$majority_habitat == "Natural habitat" & co_flock_habitat$measurementValue == 0),
+    sum (co_flock_habitat$majority_habitat == "Anthropogenic habitat" & co_flock_habitat$measurementValue == 0)), 
+  nrow = 2, 
+  byrow = TRUE)
+
+rownames (flock_table) <- c("Natural habitat", "Anthropogenic habitat")
+colnames (flock_table) <- c("Yes (1)", "No (0)")
+```
+\newpage
+Print the contingency table
+```{r, warning = FALSE, message = FALSE}
+print (flock_table)
+```
+
+Perform the Chi-squared test and obtain expected values
+```{r, warning = FALSE}
+chi_result <- chisq.test (flock_table)
+print (chi_result$expected)
+```
+All expected values for the bird data cells are greater than five. The counts are as follows: 119 for flocking in natural habitats, 12 for no flocking in natural habitats, 69 for flocking in anthropogenic habitats, and 7 for no flocking in anthropogenic habitats. Therefore, we use the Chi-squared test to analyze whether bird flocking behavior significantly differs between natural and anthropogenic habitats.
+
+Use the Chi-squared test to whether bird flocking behavior significantly differs between natural and anthropogenic habitats.
+```{r}
 chisq.test (co_flock_habitat$measurementValue, co_flock_habitat$majority_habitat)
 ```
 
-Use Fisher's Exact Test to compare whether birds from different habitats (natural vs. anthropogenic) show significant differences in flocking behavior, applicable for small sample sizes.
-```{r, warning = FALSE, message = FALSE}
-fisher.test (co_flock_habitat$measurementValue, co_flock_habitat$majority_habitat)
-```
+The assumptions for the Generalized Linear Model (GLM) are as follows:
+1. The observed values of y are independent, conditional on some predictors x.
+2. The response y follows a known distribution with a known mean-variance relationship.
+3. There is a linear relationship between a known function g of the mean y and the predictor x.
 
-Use a Generalized Linear Model (GLM) with bird flocking behavior (yes/no) as the dependent variable and primary habitat (natural or anthropogenic) as the independent variable to further examine the impact of habitat on flocking behavior.
+The bird data fits the first assumption. To check the second assumption, we examined a plot of the residuals and observed a fan shape in the bird data. Therefore, we decided not to use GLM to analyze the bird data.
 ```{r, warning = FALSE, message = FALSE}
-bird_glm <- glm (measurementValue ~ majority_habitat,
-                 data = co_flock_habitat, 
-                 family = binomial)
-summary (bird_glm)
-```
-
-Calculate the frequency of combinations between different habitats and whether flocking behavior (yes/no) is present.
-```{r, warning = FALSE, message = FALSE}
-stacked_data <- co_flock_habitat %>%
-  group_by (majority_habitat, measurementValue) %>%
-  summarise (count = n ()) %>%
-  ungroup ()
+bird.many <- manyglm (measurementValue ~ majority_habitat, family = "binomial", data = co_flock_habitat)
+plot (bird.many)
 ```
 
 Calculate the proportion of birds exhibiting flocking behavior in different habitats.
 ```{r, warning = FALSE, message = FALSE}
-stacked_data <- stacked_data %>%
+stacked_data <- co_flock_habitat %>%
+  group_by (majority_habitat, measurementValue) %>%
+  summarise (count = n ()) %>%
+  ungroup () %>% 
   group_by (majority_habitat) %>%
   mutate (percentage = count / sum (count))
 ```
@@ -160,7 +193,7 @@ ggplot(stacked_data, aes(x = majority_habitat, y = percentage, fill = as.factor 
 ```
 
 Figure 1. The Impact of Habitat on Bird Flocking Behavior
-This figure presents the proportion of birds exhibiting flocking behavior during the non-breeding season across different habitats, classified as either anthropogenic habitat (e.g., farmland, urban parks) or natural habitat. The data are shown as a stacked bar plot, where the colors of the bars represent whether flocking behavior was observed (red for flocking, blue for no flocking). The sample sizes for each habitat are indicated at the bottom, with 20 birds in anthropogenic habitats and 189 birds in natural habitats. Asterisks above the bars indicate a statistically significant difference.
+This figure presents the proportion of birds exhibiting flocking behavior during the non-breeding season across different habitats, classified as either anthropogenic habitat (e.g.,  dryland farming, urban parks) or natural habitat. The data are shown as a stacked bar plot, where the colors of the bars represent whether flocking behavior was observed (red for flocking, blue for no flocking). The sample sizes for each habitat are indicated at the bottom, with 20 birds in anthropogenic habitats and 189 birds in natural habitats. Asterisks above the bars indicate a statistically significant difference.
 
 *Hypothesis 2: There is more plumage dimorphism in diurnal versus nocturnal birds.*
 
@@ -221,21 +254,31 @@ ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
 Figure 2. Percentage of plumage colour dimorphism in birds with different activity times
 
 ## Results
-Figure 1 shows a significant difference in flocking behavior between birds from different habitats, with a higher proportion of birds exhibiting flocking behavior in natural habitats compared to anthropogenic habitats. The Chi-squared test revealed a significant difference in flocking behavior between habitats (χ² = 5.63, df = 1, p = 0.017). Additionally, Fisher's Exact Test confirmed this result, showing a significant difference in flocking behavior between habitats (p = 0.007, 95% CI: 0.0186–0.743). The Generalized Linear Model (GLM) analysis further supported this finding, indicating that birds in natural habitats have a significantly higher probability of flocking behavior compared to those in anthropogenic habitats (estimate = -1.78, p = 0.019).
+Figure 1 illustrates a significant difference in flocking behavior between Taiwanese birds from different habitats, with a higher proportion of birds exhibiting flocking behavior in natural habitats compared to anthropogenic habitats. The Chi-squared test revealed a significant difference in flocking behavior between the two habitats (χ² = 5.63, df = 1, p = 0.017). This finding indicates that birds in natural habitats are significantly more likely to exhibit flocking behavior than those in anthropogenic habitats.
 
-## Disscussion
+## Discussion
 
+The results indicate that Taiwanese birds in natural habitats have a significantly higher probability of exhibiting flocking behavior compared to those in anthropogenic habitats. This difference may be primarily due to predation avoidance and foraging efficiency. In natural habitats, flocking behavior likely provides an advantage by reducing the risk of predation and improving foraging success. In contrast, anthropogenic habitats may serve as refuges for prey species due to lower predation pressures. Studies have shown a decline in nest predation from natural to urban sites (Gering & Blair, 1999), suggesting that urban environments present a lower predation risk for birds.
 
+Moreover, urban environments provide a stable food supply and reduced predation risk, which contribute to higher bird population densities, even though per capita food availability may be low. The presence of food sources, such as restaurants, has been shown to influence avian communities, potentially leading to a decrease in species diversity while increasing the abundance of species that exploit urban resources (Brown et al., 2022). This shift in the food resource landscape may further impact bird behavior, including flocking patterns.
+
+However, the abundance of anthropogenic food sources can also disrupt predator-prey relationships in urban environments. Predators may shift their focus to human-provided resources, decoupling the natural predator-prey dynamics that govern behaviors in more natural habitats (Rodewald et al., 2011). This change in resource availability can have cascading effects on bird behavior, including the likelihood of flocking, as birds adapt to the altered ecological conditions of urban habitats.
+
+\newpage
 ## References
 Barbosa, A. (1997). The effects of predation risk on scanning and flocking behavior in dunlin. https://digital.csic.es/handle/10261/9360
 
 Beauchamp, G. (2004). Reduced Flocking by Birds on Islands with Relaxed Predation. Proceedings: Biological Sciences, 271(1543), 1039–1042.
+
+Brown, J. A., Lerman, S. B., Basile, A. J., Bateman, H. L., Deviche, P., Warren, P. S., & Sweazea, K. L. (2022). No fry zones: How restaurant distribution and abundance influence avian communities in the Phoenix, AZ metropolitan area. PLOS ONE, 17(10), e0269334. https://doi.org/10.1371/journal.pone.0269334
 
 Carere, C., Montanino, S., Moreschini, F., Zoratto, F., Chiarotti, F., Santucci, D., & Alleva, E. (2009). Aerial flocking patterns of wintering starlings, Sturnus vulgaris, under different predation risk. Animal Behaviour, 77(1), 101–107. https://doi.org/10.1016/j.anbehav.2008.08.034
 
 Dunn, P. O., Whittingham, L. A., & Pitcher, T. E. (2001). MATING SYSTEMS, SPERM COMPETITION, AND THE EVOLUTION OF SEXUAL DIMORPHISM IN BIRDS. Evolution, 55(1), 161–175. https://doi.org/10.1111/j.0014-3820.2001.tb01281.x
 
 Galeotti, P., Rubolini, D., Dunn, P. O., & Fasola, M. (2003). Colour polymorphism in birds: Causes and functions. Journal of Evolutionary Biology, 16(4), 635–646. https://doi.org/10.1046/j.1420-9101.2003.00569.x
+
+Gering, J.C. and Blair, R.B. (1999), Predation on artificial bird nests along an urban gradient: predatory risk or relaxation in urban environments?. Ecography, 22: 532-541. https://doi.org/10.1111/j.1600-0587.1999.tb01283.x
 
 Hall, M. I., & Ross, C. F. (2007). Eye shape and activity pattern in birds. Journal of Zoology, 271(4), 437–444. https://doi.org/10.1111/j.1469-7998.2006.00227.x
 
@@ -250,3 +293,5 @@ Martin, T. E., & Badyaev, A. V. (1996). SEXUAL DICHROMATISM IN BIRDS: IMPORTANCE
 Mokross, K., Ryder, T. B., Côrtes, M. C., Wolfe, J. D., & Stouffer, P. C. (2014). Decay of interspecific avian flock networks along a disturbance gradient in Amazonia. Proceedings of the Royal Society B: Biological Sciences, 281(1776), 20132599. https://doi.org/10.1098/rspb.2013.2599
 
 Owens, I. P. F., & Hartley, I. R. (1998). Sexual dimorphism in birds: Why are there so many different forms of dimorphism? Proceedings of the Royal Society of London. Series B: Biological Sciences, 265(1394), 397–407. https://doi.org/10.1098/rspb.1998.0308
+
+Rodewald, A. D., Kearns, L. J., & Shustack, D. P. (2011). Anthropogenic resource subsidies decouple predator-prey relationships. Ecological Applications: A Publication of the Ecological Society of America, 21(3), 936–943. https://doi.org/10.1890/10-0863.1
