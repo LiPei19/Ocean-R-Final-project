@@ -2,7 +2,9 @@
 title: "A Study on Flocking behavior and Sexual Dimorphism in Taiwanese Birds"
 author: "Ming-Pei Li 61143008S, Wei-Ting Sun 61343013S"
 date: "2024-12-01"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ## Introduction
