@@ -8,6 +8,7 @@ output:
 fontsize: 12pt             # 設定字體大小
 mainfont: "Times New Roman" # 設定字型
 latex_engine: xelatex
+
 ---
 \newpage
 
@@ -21,11 +22,10 @@ Building on these findings, we hypothesize that bird flocking behavior differs b
 
 ### Topic 2: Sexual Dimorphism
 
-Research on plumage dimorphism in birds reveals complex relationships with activity patterns and environmental factors. Studies have shown that different forms of dimorphism are associated with various aspects of avian behavior and ecology. Plumage-color dimorphism is linked to extra-pair paternity rates (Owens & Hartley, 1998). Nest predation may constrain female plumage brightness more than male plumage, particularly in species where only females incubate (Martin & Badyaev, 1996). Social mating systems strongly influence multiple forms of dimorphism, with polygynous and lekking species showing greater dimorphism than monogamous ones (Dunn et al., 2001).
-Color polymorphism in birds, occurring in 3.5% of species, is most prevalent in certain orders and may be maintained by disruptive selection related to detectability under variable light conditions (Galeotti et al., 2003). Activity patterns significantly influence eye morphology in birds, with nocturnal species having larger corneal diameters relative to axial lengths for enhanced visual sensitivity, while diurnal birds have larger axial lengths for improved visual acuity (Hall & Ross, 2007). 
-However, the relationship between avian activity time and plumage dimorphism has yet to be thoroughly investigated. Therefore, this study aims to examine whether there is a significant association between the activity time of birds and their plumage dimorphism.
-
+Research on plumage dimorphism in birds reveals its links to extra-pair paternity rates (Owens & Hartley, 1998), nest predation affecting female brightness (Martin & Badyaev, 1996), and social mating systems, with polygynous species showing greater dimorphism (Dunn et al., 2001). Color polymorphism, occurring in 3.5% of species, may result from selection under varying light conditions (Galeotti et al., 2003). Activity patterns influence eye morphology, with nocturnal species enhancing sensitivity and diurnal species improving acuity (Hall & Ross, 2007).
+Despite these insights, the relationship between avian activity time and plumage dimorphism remains unexplored. This study addresses this gap.
 \newpage
+
 ## Methods
 
 #### Steps for R code
@@ -36,16 +36,14 @@ library (dplyr)
 library (ggplot2)
 library (tidyr)
 library (mvabund)
-```
 
-```{r, warning = FALSE, message = FALSE}
 bird_2 <- read.table ("dwca-trait_454-v1.68/measurementorfacts.txt", header = TRUE, sep = "\t", fill = TRUE)
 
 bird_3 <-  read.table ("dwca-trait_454-v1.68/taxon.txt", header = TRUE, sep = "\t", quote = "", fill = TRUE)
 ```
 
 \newpage
-*Hypothesis 1: Birds exhibit less flocking behavior  in anthropogenic habitats compared to natural habitats, due to reduced predation risk and more stable food resource availability in anthropogenic environments.*
+*Hypothesis 1: Birds exhibit less flocking behavior in anthropogenic habitats compared to natural habitats, due to reduced predation risk and more stable food resource availability in anthropogenic environments.*
 
 Filter the bird data for conspecific flocking behavior during the non-breeding season.
 ```{r, warning = FALSE, message = FALSE}
@@ -201,12 +199,9 @@ This figure presents the proportion of birds exhibiting flocking behavior during
 
 
 Dimorphism_ActivityTime <- subset(bird_2, grepl("Dimorphism|ActivityTime", measurementType))
-# grepl 的使用在這裡是因為需要進行 部分文字匹配，而不是直接篩選一個完整的值。
-
 Dimorphism_ActivityTime_1 <- Dimorphism_ActivityTime %>% separate(col = "measurementType", 
                               sep = "_", 
                               into = c("measurement", "Type"))
-
 Dimorphism <- Dimorphism_ActivityTime_1 %>% filter(measurement=="Dimorphism" & Type=="Plumage") 
 Dimorphism_1 <- Dimorphism %>% select(-measurement, -Type) %>% rename("Plumage"=measurementValue)
 
@@ -216,26 +211,50 @@ ActivityTime_1 <- ActivityTime %>% select(id, Type)
 bird_dim_act <- merge(Dimorphism_1, ActivityTime_1, by = "id")
 ```
 
-Use the Fisher's Exact Test to compare whether birds with different active times (diurnal vs. nocturnal birds) show significant differences in plumage dimorphism.
+Categorical data can be analyzed using the Chi-square test, Fisher's exact test, and Generalized Linear Model. We need to confirm whether the assumptions of each test are met by the bird data.
+
+Create a contingency table
+```{r, warning = FALSE, message = FALSE}
+flock_table_2 <- matrix(
+  c(sum (bird_dim_act$Type == "Diurnal" & bird_dim_act$Plumage == 1), 
+    sum (bird_dim_act$Type == "Nocturnal" & bird_dim_act$Plumage == 1), 
+    sum (bird_dim_act$Type == "Diurnal" & bird_dim_act$Plumage == 0),
+    sum (bird_dim_act$Type == "Nocturnal" & bird_dim_act$Plumage == 0)), 
+  nrow = 2, 
+  byrow = TRUE)
+
+rownames (flock_table) <- c("Diunral", "Nocturnal")
+colnames (flock_table) <- c("Yes (1)", "No (0)")
+```
+
+Print the contingency table
+```{r, warning = FALSE, message = FALSE}
+print (flock_table_2)
+```
+
+Perform the Chi-squared test and obtain expected values
+```{r, warning = FALSE}
+chi_result_2 <- chisq.test (flock_table_2)
+print (chi_result_2$expected)
+```
+
+All expected values for the bird data cells are greater than five. The counts are as follows: 141 for plumage dimorphism in diurnal bird, 34 for no plumage dimorphism in diurnal bird, 300 for plumage dimorphism in nocturnal bird, and 72 for no plumage dimorphism in nocturnal bird. Therefore, we use the Chi-squared test to analyze whether there was a significant difference between diurnal and nocturnal bird plumage dimorphism.
 
 ```{r, warning = FALSE, message = FALSE}
 
 chisq.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7822
 ```
 
-Use the Chi-squared test to compare whether birds with different active times (diurnal vs. nocturnal birds) show significant differences in plumage dimorphism, applicable for small sample sizes.
+The bird data fits the first assumption of GLM. To check the second assumption of GLM, we examined a plot of the residuals and observed a fan shape in the bird data. Therefore, we decided not to use GLM to analyze the bird data.
 
 ```{r, warning = FALSE, message = FALSE}
-fisher.test (bird_dim_act$Type, bird_dim_act$Plumage) # p-value = 0.7295
+bird.many_2 <- manyglm (Plumage~Type, family = "binomial", data = bird_dim_act)
+plot (bird.many_2)
+```
 
-logistic <- glm(Plumage~Type, data = bird_dim_act, family = binomial)
-summary(logistic)
+Plot the proportion of birds exhibit plumage dimorphism by different active times using a stacked bar chart.
 
-data_summary <- bird_dim_act %>%
-  group_by(Type) %>%
-  summarise(Count = n(), Plumage_Proportion = mean(Plumage == 1))
-# Diurnal = 0.3167421, Nocturnal = 0.3364486
-
+```{r, warning = FALSE, message = FALSE}
 ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
   geom_bar(position = "fill", width = 0.6) +
   labs(
@@ -251,7 +270,7 @@ ggplot(bird_dim_act, aes(x = Type, fill = as.factor(Plumage))) +
   annotate ("text", x = 1, y = 0.1, label = "n = 442", size = 4, color = "dimgray")
 ```
 
-Figure 2. Percentage of plumage colour dimorphism in birds with different activity times
+Figure 2. Percentage of plumage colour dimorphism in birds with different activity times. This figure illustrates the proportion of birds exhibiting plumage dimorphism across different activity times. The data are displayed as a stacked bar plot, where bar colors indicate the presence of plumage dimorphism (red for plumage dimorphism, blue for no plumage dimorphism). The sample sizes for each activity time are shown at the bottom of the plot, with 442 diurnal birds and 107 nocturnal birds
 
 ## Results
 Figure 1 illustrates a significant difference in flocking behavior between Taiwanese birds from different habitats, with a higher proportion of birds exhibiting flocking behavior in natural habitats compared to anthropogenic habitats. The Chi-squared test revealed a significant difference in flocking behavior between the two habitats (χ² = 5.63, df = 1, p = 0.017). This finding indicates that birds in natural habitats are significantly more likely to exhibit flocking behavior than those in anthropogenic habitats.
