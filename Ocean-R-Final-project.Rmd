@@ -19,7 +19,7 @@ Research on plumage dimorphism in birds reveals its links to extra-pair paternit
 
 # Methods
 ## Steps for R code
-Load the necessary packages.
+Load the necessary packages. 
 ```{r, warning = FALSE, message = FALSE}
 library (dplyr)
 library (ggplot2)
@@ -133,12 +133,14 @@ Figure 2. Percentage of plumage dimorphism in birds with different activity time
 # Results
 ## Topic 1: Flocking behavior
 Figure 1 shows a significant difference in flocking behavior between Taiwanese birds in natural and anthropogenic habitats, with more flocking in natural habitats. The Chi-squared test (χ² = 5.63, df = 1, p = 0.017) confirms that birds in natural habitats are more likely to exhibit flocking behavior.
+
 ## Topic 2: Sexual Dimorphism
 Figure 2 shows no significant difference in bird plumage color dimorphism across different activity times. The Chi-squared test results indicate no significant association (χ² = 0.07, df = 1, p = 0.78).
 
 # Discussion
 ## Topic 1: Flocking behavior
 The results show that Taiwanese birds in natural habitats are more likely to exhibit flocking behavior, likely due to predation avoidance and foraging efficiency. Urban habitats offer stable food supplies, increasing bird densities but reducing species diversity (Gering & Blair, 1999; Brown et al., 2022). However, anthropogenic food sources can disrupt predator-prey dynamics, affecting flocking behavior (Rodewald et al., 2011).
+
 ## Topic 2: Sexual Dimorphism
 The results show no significant difference in plumage color dimorphism across different activity times in Taiwanese birds, possibly due to the influence of multiple indistinguishable factors.
 Sexual dimorphism in birds is shaped by social mating systems, with polygynous and lekking species exhibiting greater dimorphism than monogamous ones (Dunn et al., 2001). Plumage-color dimorphism relates to extra-pair paternity, while size dimorphism aligns with mating systems and parental care (Owens & Hartley, 1998). Sperm competition (testis size) influences tail and wing length dimorphism but is a weaker predictor of plumage dimorphism (Dunn et al., 2001). Geographic and life history factors also play roles (Dunn et al., 2001).
